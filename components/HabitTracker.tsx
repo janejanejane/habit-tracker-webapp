@@ -1,3 +1,18 @@
+/**
+ * HabitTracker Component - Main application component for the Habit Tracker.
+ *
+ * This file contains the HabitTracker component, which serves as the root component
+ * of the Habit Tracker application. It manages the global state for habits and logs,
+ * handles data persistence through localStorage, and orchestrates the user interface
+ * including habit listing, creation, completion tracking, and deletion. The component
+ * provides a complete habit tracking experience with real-time statistics and
+ * responsive design.
+ *
+ * @fileoverview Main React component for the Habit Tracker application
+ * @author Habit Tracker Team
+ * @version 1.0.0
+ */
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -7,6 +22,32 @@ import HabitList from "./HabitList";
 import CreateHabitForm from "./CreateHabitForm";
 import { format } from "date-fns";
 
+/**
+ * HabitTracker - Main React component for the habit tracking application.
+ *
+ * This component serves as the central hub of the application, managing all
+ * habit-related state and user interactions. It loads data from localStorage
+ * on initialization, provides handlers for creating, updating, and deleting
+ * habits, and renders the complete user interface including statistics,
+ * habit lists, and creation forms.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered habit tracker application
+ *
+ * @example
+ * ```tsx
+ * // This component is typically used as the main app component
+ * function App() {
+ *   return <HabitTracker />;
+ * }
+ * ```
+ *
+ * @sideEffects
+ * - Loads and saves data to localStorage
+ * - Manages global application state
+ * - Triggers re-renders of child components
+ * - Performs date calculations for statistics
+ */
 export default function HabitTracker() {
   const [habits, setHabits] = useState<Habit[]>([]);
   const [logs, setLogs] = useState<HabitLog[]>([]);
@@ -20,6 +61,41 @@ export default function HabitTracker() {
     setLoading(false);
   }, []);
 
+  /**
+   * Handles the creation of a new habit.
+   *
+   * This function creates a new habit using the storage layer, updates the
+   * local state to include the new habit, and closes the creation form.
+   * The habit data provided excludes auto-generated fields like id and timestamps.
+   *
+   * @function handleCreateHabit
+   * @param {Omit<Habit, "id" | "createdAt" | "updatedAt">} habitData - The habit data to create
+   * @returns {void}
+   *
+   * @inputs
+   * - habitData: Partial habit object without id, createdAt, updatedAt
+   * - Current habits state
+   *
+   * @outputs
+   * - Updates habits state with new habit
+   * - Sets isCreating to false
+   *
+   * @sideEffects
+   * - Persists new habit to localStorage via habitStorage.createHabit
+   * - Updates component state
+   * - Closes creation form
+   *
+   * @example
+   * ```typescript
+   * const newHabitData = {
+   *   name: 'Exercise',
+   *   description: 'Daily workout',
+   *   color: '#FF6B6B',
+   *   frequency: 'daily'
+   * };
+   * handleCreateHabit(newHabitData); // Creates habit and updates state
+   * ```
+   */
   const handleCreateHabit = (
     habitData: Omit<Habit, "id" | "createdAt" | "updatedAt">,
   ) => {
@@ -28,6 +104,37 @@ export default function HabitTracker() {
     setIsCreating(false);
   };
 
+  /**
+   * Handles toggling the completion status of a habit for today.
+   *
+   * This function logs or updates a habit completion for the current day.
+   * It either creates a new log entry or updates an existing one, then
+   * updates the local logs state accordingly.
+   *
+   * @function handleToggleCompletion
+   * @param {string} habitId - The ID of the habit to toggle
+   * @param {boolean} completed - The new completion status
+   * @returns {void}
+   *
+   * @inputs
+   * - habitId: ID of the habit being toggled
+   * - completed: New completion status (true/false)
+   * - Current logs state
+   *
+   * @outputs
+   * - Updates logs state with new or modified log entry
+   *
+   * @sideEffects
+   * - Persists completion log to localStorage via habitStorage.logCompletion
+   * - Updates component state
+   * - May create new log entry or modify existing one
+   *
+   * @example
+   * ```typescript
+   * handleToggleCompletion('habit123', true); // Marks habit as completed today
+   * handleToggleCompletion('habit123', false); // Marks habit as incomplete today
+   * ```
+   */
   const handleToggleCompletion = (habitId: string, completed: boolean) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -47,6 +154,34 @@ export default function HabitTracker() {
     });
   };
 
+  /**
+   * Handles the deletion of a habit.
+   *
+   * This function removes a habit from storage and updates the local state
+   * to reflect the deletion, including removing all associated log entries.
+   *
+   * @function handleDeleteHabit
+   * @param {string} habitId - The ID of the habit to delete
+   * @returns {void}
+   *
+   * @inputs
+   * - habitId: ID of the habit to be deleted
+   * - Current habits and logs state
+   *
+   * @outputs
+   * - Updates habits state (removes deleted habit)
+   * - Updates logs state (removes associated logs)
+   *
+   * @sideEffects
+   * - Permanently deletes habit from localStorage via habitStorage.deleteHabit
+   * - Removes all log entries for the habit from localStorage
+   * - Updates component state
+   *
+   * @example
+   * ```typescript
+   * handleDeleteHabit('habit123'); // Deletes habit and all its logs
+   * ```
+   */
   const handleDeleteHabit = (habitId: string) => {
     habitStorage.deleteHabit(habitId);
     setHabits((prev) => prev.filter((h) => h.id !== habitId));
