@@ -254,7 +254,7 @@ export default function CreateHabitForm({
             required
           />
         </div>
-
+        createahabit
         {/* Description textarea section */}
         <div>
           <label className="block text-sm font-medium text-habit-700">
@@ -268,7 +268,6 @@ export default function CreateHabitForm({
             className="mt-1 w-full rounded-lg border-2 border-habit-300 px-3 py-2 text-habit-900 placeholder-habit-400 focus:border-blue-500 focus:outline-none"
           />
         </div>
-
         {/* Frequency and icon selection grid */}
         <div className="grid grid-cols-2 gap-4">
           {/* Frequency selector */}
@@ -306,7 +305,6 @@ export default function CreateHabitForm({
             </select>
           </div>
         </div>
-
         {/* Color picker section */}
         <div>
           <label className="block text-sm font-medium text-habit-700">
@@ -328,7 +326,6 @@ export default function CreateHabitForm({
             ))}
           </div>
         </div>
-
         {/* Action buttons */}
         <div className="flex gap-3 pt-4">
           <button

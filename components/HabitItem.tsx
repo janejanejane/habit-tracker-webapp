@@ -15,9 +15,10 @@
 "use client";
 
 import { Habit, HabitLog } from "@/lib/types";
-import { format } from "date-fns";
 import { useState } from "react";
 import { calculateStats } from "@/lib/storage";
+import ProgressBar from "./ProgressBar";
+import StreakDisplay from "./StreakDisplay";
 
 /**
  * Props for the HabitItem component.
@@ -192,39 +193,8 @@ export default function HabitItem({
           {habit.description && (
             <p className="mt-1 text-sm text-habit-600">{habit.description}</p>
           )}
-          <div className="mt-3 flex items-center gap-4">
-            <div
-              className={`text-sm px-3 py-1 rounded-full transition-all ${
-                stats.currentStreak > 0
-                  ? "bg-orange-100 border border-orange-300"
-                  : ""
-              }`}
-            >
-              <div className="flex items-center gap-1">
-                <span className="text-lg">
-                  {stats.currentStreak > 0 ? "🔥" : ""}
-                </span>
-                <span
-                  className={`font-semibold ${
-                    stats.currentStreak > 0
-                      ? "text-orange-600"
-                      : "text-habit-900"
-                  }`}
-                >
-                  {stats.currentStreak}
-                </span>
-                <span
-                  className={
-                    stats.currentStreak > 0
-                      ? "text-orange-600"
-                      : "text-habit-600"
-                  }
-                >
-                  {" "}
-                  day streak
-                </span>
-              </div>
-            </div>
+          <div className="mt-3 flex flex-wrap items-center gap-4">
+            <StreakDisplay currentStreak={stats.currentStreak} />
             <div className="text-sm">
               <span className="font-semibold text-habit-900">
                 {stats.totalCompleted}
@@ -265,12 +235,7 @@ export default function HabitItem({
             {Math.round(stats.completionRate)}% completion
           </span>
         </div>
-        <div className="mt-1 h-2 overflow-hidden rounded-full bg-habit-200">
-          <div
-            className="h-full bg-green-500 transition-all duration-300"
-            style={{ width: `${stats.completionRate}%` }}
-          />
-        </div>
+        <ProgressBar value={stats.completionRate} />
       </div>
     </div>
   );

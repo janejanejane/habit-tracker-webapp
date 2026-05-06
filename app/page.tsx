@@ -1,5 +1,5 @@
-import HabitTracker from "@/components/HabitTracker";
+import Dashboard from "@/components/Dashboard";
 
 export default function Home() {
-  return <HabitTracker />;
+  return <Dashboard />;
 }
