@@ -1,9 +1,17 @@
 /**
- * @fileoverview CreateHabitForm - A React component for creating new habits
+ * @fileoverview CreateHabitForm - A React component for creating new habits.
  *
- * This component provides a comprehensive form interface for users to create new habits
- * in the Habit Tracker application. It includes form validation, color selection,
- * icon selection, and frequency options.
+ * This file exports the CreateHabitForm component, which provides a comprehensive form interface
+ * for users to create new habits in the Habit Tracker application. It includes form validation,
+ * color selection, icon selection, and frequency options.
+ *
+ * ## Purpose
+ * - Allows users to input all required data for a new habit
+ * - Handles validation, state, and submission logic
+ * - Provides a user-friendly and accessible UI for habit creation
+ *
+ * ## Main Export
+ * - CreateHabitForm (default): React component
  *
  * @author Habit Tracker Team
  * @version 1.0.0

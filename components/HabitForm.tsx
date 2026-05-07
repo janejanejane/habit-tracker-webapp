@@ -1,13 +1,20 @@
 /**
- * HabitForm Component - Wrapper component for creating new habits.
+ * @fileoverview HabitForm Component - Wrapper component for creating new habits.
  *
- * This component provides a styled container and layout for the CreateHabitForm.
- * It acts as a bridge between the HabitManager and the detailed form implementation,
+ * This file exports the HabitForm component, which provides a styled container and layout for the
+ * CreateHabitForm. It acts as a bridge between the HabitManager and the detailed form implementation,
  * providing consistent styling and a header for the habit creation interface.
  *
- * @fileoverview Habit creation form wrapper component
+ * ## Purpose
+ * - Wraps CreateHabitForm with consistent styling and header
+ * - Delegates form logic to CreateHabitForm
+ *
+ * ## Main Export
+ * - HabitForm (default): React component
+ *
  * @author Habit Tracker Team
  * @version 1.0.0
+ * @since 2026-05-07
  */
 
 import CreateHabitForm from "./CreateHabitForm";

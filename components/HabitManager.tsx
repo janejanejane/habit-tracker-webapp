@@ -1,14 +1,21 @@
 /**
- * HabitManager Component - Core habit management functionality.
+ * @fileoverview HabitManager Component - Core habit management and CRUD operations for habits.
  *
- * This component handles all habit-related state management, CRUD operations,
- * and rendering of habit lists and creation forms. It focuses on the business
- * logic of habit tracking while delegating layout concerns to parent components
- * like Dashboard.
+ * This file exports the HabitManager React component, which is responsible for all business logic
+ * related to habit tracking. It manages state for habits and logs, handles CRUD operations,
+ * and renders the habit list, creation form, and statistics. Layout is delegated to parent components.
  *
- * @fileoverview Habit management component with state and operations
+ * ## Purpose
+ * - Centralizes all habit-related state and operations
+ * - Provides the main interface for creating, updating, deleting, and listing habits
+ * - Not concerned with overall page layout (handled by Dashboard)
+ *
+ * ## Main Export
+ * - HabitManager (default): React component
+ *
  * @author Habit Tracker Team
  * @version 1.0.0
+ * @since 2026-05-07
  */
 
 "use client";
@@ -21,46 +28,80 @@ import HabitForm from "./HabitForm";
 import HabitGrid from "./HabitGrid";
 import StatCard from "./StatCard";
 
+/**
+ * Props for the HabitManager component
+ * @interface HabitManagerProps
+ * @property {Date} selectedDate - The currently selected date for tracking
+ * @property {(totalHabits: number, completedToday: number) => void} [onStatsUpdate] - Optional callback for stats updates
+ */
 interface HabitManagerProps {
+  /**
+   * The currently selected date for tracking habits
+   */
   selectedDate: Date;
+  /**
+   * Optional callback to receive updates on total habits and completed count for today
+   */
   onStatsUpdate?: (totalHabits: number, completedToday: number) => void;
 }
 
 /**
- * HabitManager - Component for managing habit state and operations.
+ * HabitManager - Main component for managing habit state and CRUD operations.
  *
- * This component manages the core habit tracking functionality including
- * state management, data persistence, and user interactions. It renders
- * the habit list, creation form, and statistics without handling overall
- * page layout.
+ * This component manages the core habit tracking functionality including:
+ * - State management for habits and logs
+ * - Data persistence to localStorage
+ * - User interactions for creating, toggling, and deleting habits
+ * - Rendering the habit list, creation form, and statistics
  *
  * @component
  * @param {HabitManagerProps} props - The props for the component
  * @returns {JSX.Element} The rendered habit management interface
  *
- * @example
- * ```tsx
- * <HabitManager selectedDate={new Date()} onStatsUpdate={handleStats} />
- * ```
+ * @inputs
+ * - selectedDate: Date to track completions for
+ * - onStatsUpdate: Optional callback for stats updates
+ *
+ * @outputs
+ * - Renders habit statistics, list, and creation form
+ * - Calls onStatsUpdate with updated stats
  *
  * @sideEffects
  * - Loads and saves data to localStorage
  * - Manages habit-related application state
+ *
+ * @example
+ * ```tsx
+ * <HabitManager selectedDate={new Date()} onStatsUpdate={handleStats} />
+ * ```
  */
-export default function HabitManager({ selectedDate, onStatsUpdate }: HabitManagerProps) {
+export default function HabitManager({
+  selectedDate,
+  onStatsUpdate,
+}: HabitManagerProps) {
   const [habits, setHabits] = useState<Habit[]>([]);
   const [logs, setLogs] = useState<HabitLog[]>([]);
   const [isCreating, setIsCreating] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // Load data from localStorage on mount
+  /**
+   * Loads all habits and logs from localStorage on mount.
+   *
+   * @sideEffects
+   * - Sets habits and logs state from persistent storage
+   */
   useEffect(() => {
     setHabits(habitStorage.getAllHabits());
     setLogs(habitStorage.getAllLogs());
     setLoading(false);
   }, []);
 
-  // Update parent with stats whenever habits or logs change
+  /**
+   * Updates parent with statistics whenever habits or logs change.
+   *
+   * @sideEffects
+   * - Calls onStatsUpdate with total habits and completed count for today
+   */
   useEffect(() => {
     if (onStatsUpdate) {
       const todayDate = new Date(selectedDate);
@@ -78,6 +119,13 @@ export default function HabitManager({ selectedDate, onStatsUpdate }: HabitManag
 
   /**
    * Handles the creation of a new habit.
+   *
+   * @function handleCreateHabit
+   * @param {Omit<Habit, "id" | "createdAt" | "updatedAt">} habitData - Data for the new habit
+   * @returns {void}
+   * @sideEffects
+   * - Persists new habit to storage
+   * - Updates local state
    */
   const handleCreateHabit = (
     habitData: Omit<Habit, "id" | "createdAt" | "updatedAt">,
@@ -89,6 +137,13 @@ export default function HabitManager({ selectedDate, onStatsUpdate }: HabitManag
 
   /**
    * Handles toggling the completion status of a habit for today.
+   *
+   * @function handleToggleCompletion
+   * @param {string} habitId - The ID of the habit to toggle
+   * @param {boolean} completed - The new completion status
+   * @returns {void}
+   * @sideEffects
+   * - Updates log in storage and local state
    */
   const handleToggleCompletion = (habitId: string, completed: boolean) => {
     const today = new Date(selectedDate);
@@ -111,6 +166,12 @@ export default function HabitManager({ selectedDate, onStatsUpdate }: HabitManag
 
   /**
    * Handles the deletion of a habit.
+   *
+   * @function handleDeleteHabit
+   * @param {string} habitId - The ID of the habit to delete
+   * @returns {void}
+   * @sideEffects
+   * - Removes habit and logs from storage and local state
    */
   const handleDeleteHabit = (habitId: string) => {
     habitStorage.deleteHabit(habitId);
@@ -118,25 +179,31 @@ export default function HabitManager({ selectedDate, onStatsUpdate }: HabitManag
     setLogs((prev) => prev.filter((l) => l.habitId !== habitId));
   };
 
+  // Show loading state while fetching habits/logs
   if (loading) {
     return <div className="text-center text-habit-600">Loading habits...</div>;
   }
 
   return (
     <div className="space-y-6">
+      {/* Statistics cards */}
       <div className="grid gap-4 md:grid-cols-2">
         <StatCard title="Active habits" value={habits.length} />
-        <StatCard title="Completed today" value={
-          logs.filter((log) => {
-            const logDate = new Date(log.date);
-            logDate.setHours(0, 0, 0, 0);
-            const todayDate = new Date(selectedDate);
-            todayDate.setHours(0, 0, 0, 0);
-            return logDate.getTime() === todayDate.getTime() && log.completed;
-          }).length
-        } />
+        <StatCard
+          title="Completed today"
+          value={
+            logs.filter((log) => {
+              const logDate = new Date(log.date);
+              logDate.setHours(0, 0, 0, 0);
+              const todayDate = new Date(selectedDate);
+              todayDate.setHours(0, 0, 0, 0);
+              return logDate.getTime() === todayDate.getTime() && log.completed;
+            }).length
+          }
+        />
       </div>
 
+      {/* Habit list or empty state */}
       <section>
         {habits.length > 0 ? (
           <HabitGrid>
@@ -156,9 +223,13 @@ export default function HabitManager({ selectedDate, onStatsUpdate }: HabitManag
         )}
       </section>
 
+      {/* Habit creation form or button */}
       <div className="sticky bottom-4">
         {isCreating ? (
-          <HabitForm onSubmit={handleCreateHabit} onCancel={() => setIsCreating(false)} />
+          <HabitForm
+            onSubmit={handleCreateHabit}
+            onCancel={() => setIsCreating(false)}
+          />
         ) : (
           <button
             onClick={() => setIsCreating(true)}

@@ -1,13 +1,19 @@
 /**
- * Header Component - Top navigation and date display for the Habit Tracker.
+ * @fileoverview Header Component - Top navigation and date display for the Habit Tracker.
  *
- * This component renders the main header section of the dashboard, displaying
- * the application title, current date, and a summary of today's habit
- * completion statistics.
+ * This file exports the Header component, which renders the main header section of the dashboard,
+ * displaying the application title, current date, and a summary of today's habit completion statistics.
  *
- * @fileoverview Dashboard header with date and completion summary
+ * ## Purpose
+ * - Display the app title and current date
+ * - Show a summary of completed habits for today
+ *
+ * ## Main Export
+ * - Header (default): React component
+ *
  * @author Habit Tracker Team
  * @version 1.0.0
+ * @since 2026-05-07
  */
 
 import { format } from "date-fns";

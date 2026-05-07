@@ -1,15 +1,23 @@
 /**
- * HabitList Component - Container component for displaying a list of habits.
+ * @fileoverview HabitList Component - Container component for displaying a list of habits.
  *
- * This file contains the HabitList component, which is responsible for rendering
- * a collection of habit items in a responsive grid layout. It handles the display
- * of multiple habits, manages today's completion logs for each habit, and provides
- * empty state messaging when no habits exist. The component acts as a bridge
- * between the habit data and individual HabitItem components.
+ * This file exports the HabitList component, which is responsible for rendering a collection
+ * of habit items in a responsive grid layout. It handles the display of multiple habits,
+ * manages today's completion logs for each habit, and provides empty state messaging when
+ * no habits exist. The component acts as a bridge between the habit data and individual
+ * HabitItem components.
  *
- * @fileoverview React component for displaying a list of habit items
+ * ## Purpose
+ * - Display a list of all habits for the user
+ * - Manage and pass down today's completion logs
+ * - Show empty state when no habits exist
+ *
+ * ## Main Export
+ * - HabitList (default): React component
+ *
  * @author Habit Tracker Team
  * @version 1.0.0
+ * @since 2026-05-07
  */
 
 "use client";

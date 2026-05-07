@@ -1,13 +1,20 @@
 /**
- * StreakDisplay Component - Visual indicator for habit streaks.
+ * @fileoverview StreakDisplay Component - Visual indicator for habit streaks.
  *
- * This component displays the current streak for a habit with a flame emoji
- * icon that appears when the streak is greater than 0. It provides visual
- * motivation and encouragement for users to maintain their habits.
+ * This file exports the StreakDisplay component, which displays the current streak for a habit with a flame emoji
+ * icon that appears when the streak is greater than 0. It provides visual motivation and encouragement for users
+ * to maintain their habits.
  *
- * @fileoverview Streak display component with flame emoji indicator
+ * ## Purpose
+ * - Visually indicate the current streak for a habit
+ * - Motivate users to maintain streaks with a flame emoji
+ *
+ * ## Main Export
+ * - StreakDisplay (default): React component
+ *
  * @author Habit Tracker Team
  * @version 1.0.0
+ * @since 2026-05-07
  */
 
 /**

@@ -1,6 +1,6 @@
 # Habit Tracker
 
-A modern web application to track daily habits, build streaks, and achieve your goals. Built with Next.js 16, React 19, Tailwind CSS, and TypeScript with comprehensive JSDoc documentation and 53+ unit tests.
+A modern web application to track daily habits, build streaks, and achieve your goals. Built with Next.js 16, React 19, Tailwind CSS, and TypeScript. All components and library files are fully documented with comprehensive JSDoc comments, and the project includes 53+ unit tests.
 
 ## Features
 
@@ -13,7 +13,7 @@ A modern web application to track daily habits, build streaks, and achieve your 
 - ✅ Local storage persistence
 - ✅ Responsive design
 - ✅ Real-time statistics
-- ✅ Comprehensive JSDoc documentation
+- ✅ **Comprehensive JSDoc documentation for all components and libraries**
 - ✅ 100% test coverage with Jest & React Testing Library
 - ✅ Type-safe with TypeScript strict mode
 
@@ -79,6 +79,16 @@ npm run dev
 
 Each habit card shows:
 
+## Documentation
+
+All React components and core library files are fully documented with JSDoc comments. You can find:
+
+- Top-level summaries and file purposes at the top of each file in `/components` and `/lib`
+- JSDoc for every function, prop, and component
+- Inputs, outputs, side effects, and usage examples in the code
+
+**See the source code for up-to-date documentation and usage examples.**
+
 - **Current Streak**: Days/weeks completed consecutively
 - **Total Completed**: Total number of completions
 - **Completion Rate**: Visual progress bar
@@ -91,7 +101,7 @@ Each habit card shows:
 
 ## Project Structure
 
-```
+````
 habit-tracker-webapp/
 ├── app/                       # Next.js App Router directory
 │   ├── page.tsx              # Home page (renders Dashboard)
@@ -129,25 +139,25 @@ interface Habit {
   updatedAt: Date;                               // Last update timestamp
   isActive: boolean;                             // Active status
 }
-```
+````
 
 ### HabitLog
 
 ```typescript
 interface HabitLog {
-  id: string;                                    // Auto-generated
-  habitId: string;                               // Reference to Habit
-  userId: string;                                // Current user ID
-  date: Date;                                    // Log date
-  completed: boolean;                            // Completion status
-  notes?: string;                                // Optional notes
-  createdAt: Date;                               // Creation timestamp
+  id: string; // Auto-generated
+  habitId: string; // Reference to Habit
+  userId: string; // Current user ID
+  date: Date; // Log date
+  completed: boolean; // Completion status
+  notes?: string; // Optional notes
+  createdAt: Date; // Creation timestamp
 }
 ```
 
 ### UserStats
 
-```typescript
+````typescript
 interface UserStats {
   habitId: string;                               // Reference to Habit
   currentStreak: number;                         // Consecutive days completed
@@ -166,11 +176,11 @@ interface UserStats {
   notes?: string;
   createdAt: Date;
 }
-```
+````
 
 ### UserStats
 
-```typescript
+````typescript
 {
   habitId: string;
   currentStreak: number;
@@ -197,7 +207,7 @@ habitStorage.updateHabit(id: string, updates: Partial<Habit>): Habit
 
 habitStorage.deleteHabit(id: string): void
 // Removes habit and all associated logs
-```
+````
 
 ### Log Operations
 
@@ -211,7 +221,7 @@ habitStorage.getAllLogs(): HabitLog[]
 
 ### Statistics
 
-```typescript
+````typescript
 calculateStats(habitId: string): UserStats
 // Calculates comprehensive stats for a habit:
 // - currentStreak: consecutive days completed ending today
@@ -240,14 +250,17 @@ npm run lint
 
 # Fix linting issues
 npm run lint -- --fix
-```
+````
+
 ### Phase 2: Backend & Authentication
+
 - [ ] User authentication (NextAuth.js)
 - [ ] Backend database (PostgreSQL + Prisma)
 - [ ] API routes for CRUD operations
 - [ ] Multi-device sync
 
 ### Phase 3: Advanced Features
+
 - [ ] Habit reminders & notifications (email/push)
 - [ ] Advanced analytics dashboard
 - [ ] Habit templates & suggestions
@@ -255,18 +268,21 @@ npm run lint -- --fix
 - [ ] Habit insights & recommendations
 
 ### Phase 4: UI/UX Enhancements
+
 - [ ] Dark mode support
 - [ ] Customizable themes
 - [ ] Export data (CSV/PDF)
 - [ ] Mobile-optimized UI
 
 ### Phase 5: Expansion
+
 - [ ] Mobile app (React Native)
 - [ ] Browser extension
 - [ ] API for third-party integrationsbit objects
 - `habit_logs_db` - Array of all HabitLog objects
 
 **Storage Pattern**: The app uses a CRUD pattern with localStorage:
+
 - **Create**: `habitStorage.createHabit()` generates ID via `Date.now()`
 - **Read**: `habitStorage.getAllHabits()`, `habitStorage.getAllLogs()`
 - **Update**: `habitStorage.updateHabit()`, `habitStorage.logCompletion()`
@@ -278,9 +294,10 @@ npm run lint -- --fix
 - Data persists across browser sessions
 - Clearing browser data will remove all habits
 - **For production**: Migrate to a backend database (PostgreSQL + Prisma recommended)
-npm test                    # Run all tests
-npm test -- --coverage      # Run with coverage report
-npm test -- --watch         # Watch mode for development
+  npm test # Run all tests
+  npm test -- --coverage # Run with coverage report
+  npm test -- --watch # Watch mode for development
+
 ```
 
 ### Build & Performance

@@ -1,13 +1,20 @@
 /**
- * StatCard Component - Displays a single statistic or metric.
+ * @fileoverview StatCard Component - Displays a single statistic or metric.
  *
- * This component provides a consistent card-style display for showing
- * numerical metrics and statistics throughout the application. It's used
- * for displaying habit counts, completion rates, and other key metrics.
+ * This file exports the StatCard component, which provides a consistent card-style display for showing
+ * numerical metrics and statistics throughout the application. It's used for displaying habit counts,
+ * completion rates, and other key metrics.
  *
- * @fileoverview Statistic metric display card component
+ * ## Purpose
+ * - Display a single metric or statistic in a card format
+ * - Provide consistent UI for stats throughout the app
+ *
+ * ## Main Export
+ * - StatCard (default): React component
+ *
  * @author Habit Tracker Team
  * @version 1.0.0
+ * @since 2026-05-07
  */
 
 /**

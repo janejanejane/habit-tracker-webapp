@@ -1,13 +1,20 @@
 /**
- * ProgressBar Component - Visual progress indicator for habit completion.
+ * @fileoverview ProgressBar Component - Visual progress indicator for habit completion.
  *
- * This component displays a horizontal progress bar showing the completion
- * percentage of a habit. It uses smooth animations and clamps the value
- * between 0 and 100 to ensure valid visual representation.
+ * This file exports the ProgressBar component, which displays a horizontal progress bar showing
+ * the completion percentage of a habit. It uses smooth animations and clamps the value between
+ * 0 and 100 to ensure valid visual representation.
  *
- * @fileoverview Visual progress indicator component
+ * ## Purpose
+ * - Visually indicate completion percentage for a habit
+ * - Provide animated feedback for progress changes
+ *
+ * ## Main Export
+ * - ProgressBar (default): React component
+ *
  * @author Habit Tracker Team
  * @version 1.0.0
+ * @since 2026-05-07
  */
 
 /**

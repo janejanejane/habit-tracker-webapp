@@ -1,13 +1,20 @@
 /**
- * Sidebar Component - Secondary navigation and quick stats panel.
+ * @fileoverview Sidebar Component - Secondary navigation and quick stats panel.
  *
- * This component displays quick statistics and additional information
- * in a sidebar format. It shows the number of active habits, completion
- * summary for today, and provides guidance for habit maintenance.
+ * This file exports the Sidebar component, which displays quick statistics and additional information
+ * in a sidebar format. It shows the number of active habits, completion summary for today, and provides
+ * guidance for habit maintenance.
  *
- * @fileoverview Sidebar panel with quick statistics and navigation
+ * ## Purpose
+ * - Display quick stats and guidance for the user
+ * - Provide a secondary navigation/info panel
+ *
+ * ## Main Export
+ * - Sidebar (default): React component
+ *
  * @author Habit Tracker Team
  * @version 1.0.0
+ * @since 2026-05-07
  */
 
 /**

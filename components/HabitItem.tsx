@@ -1,15 +1,22 @@
 /**
- * HabitItem Component - Individual habit display and interaction component.
+ * @fileoverview HabitItem Component - Individual habit display and interaction component.
  *
- * This file contains the HabitItem component, which is responsible for rendering
- * a single habit in the habit list. It displays habit details, completion status,
- * statistics, and provides interaction buttons for toggling completion and deletion.
- * The component integrates with local storage for statistics calculation and
- * supports visual feedback for completed habits.
+ * This file exports the HabitItem component, which is responsible for rendering a single habit
+ * in the habit list. It displays habit details, completion status, statistics, and provides
+ * interaction buttons for toggling completion and deletion. The component integrates with local
+ * storage for statistics calculation and supports visual feedback for completed habits.
  *
- * @fileoverview React component for displaying and interacting with individual habits
+ * ## Purpose
+ * - Display all relevant information for a single habit
+ * - Allow users to toggle completion and delete habits
+ * - Show statistics and streaks for each habit
+ *
+ * ## Main Export
+ * - HabitItem (default): React component
+ *
  * @author Habit Tracker Team
  * @version 1.0.0
+ * @since 2026-05-07
  */
 
 "use client";

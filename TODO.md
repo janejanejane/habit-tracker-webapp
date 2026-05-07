@@ -12,7 +12,7 @@
 - [x] Habit creation and tracking UI implemented
 - [x] Local storage persistence via `lib/storage.ts` with complete documentation
 - [x] All main components built: `Dashboard`, `HabitManager`, `HabitList`, `HabitItem`, `CreateHabitForm`
-- [x] **Complete JSDoc documentation** added to all component and library files
+- [x] **Complete JSDoc documentation** added to all component and library files (see source for details)
 - [x] Test suite passing: **53/53 tests**
 - [x] Component hierarchy fully implemented per spec (Header, Sidebar, HabitGrid, ProgressBar, StreakDisplay, StatCard, DateSelector, HabitForm)
 - [x] Dashboard layout with sidebar and main content area
@@ -40,7 +40,7 @@
 - **MVP Status**: Fully functional habit tracker with client-side localStorage
 - **Architecture**: Clean separation of concerns with Dashboard (layout) and HabitManager (logic)
 - **Testing**: 53 passing unit tests covering components, storage, and types
-- **Documentation**: All files have comprehensive JSDoc comments
+- **Documentation**: All files have comprehensive JSDoc comments (see `/components` and `/lib` for details)
 - **Hydration**: Client-side state initialized with `useEffect` to prevent SSR/client mismatch
 - **Component Count**: 13 active components, all in use (no orphans)
 - **Next Phase**: Move from localStorage to API routes + database for persistence

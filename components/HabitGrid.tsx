@@ -1,12 +1,19 @@
 /**
- * HabitGrid Component - Layout container for displaying habits in a responsive grid.
+ * @fileoverview HabitGrid Component - Layout container for displaying habits in a responsive grid.
  *
- * This component provides a consistent grid layout for rendering habit items.
- * It uses Tailwind CSS to create a responsive grid with consistent gap spacing.
+ * This file exports the HabitGrid component, which provides a consistent grid layout for rendering
+ * habit items. It uses Tailwind CSS to create a responsive grid with consistent gap spacing.
  *
- * @fileoverview Responsive grid layout container for habits
+ * ## Purpose
+ * - Provide a responsive grid layout for habit items
+ * - Ensure consistent spacing and alignment
+ *
+ * ## Main Export
+ * - HabitGrid (default): React component
+ *
  * @author Habit Tracker Team
  * @version 1.0.0
+ * @since 2026-05-07
  */
 
 import type { ReactNode } from "react";
