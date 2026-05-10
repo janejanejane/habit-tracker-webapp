@@ -1,0 +1,34 @@
+# Dependencies (Massive memory hogs)
+node_modules/
+bower_components/
+vendor/
+
+# Build outputs and cache
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+*.pyc
+
+# IDE and System files
+.vscode/
+.idea/
+.DS_Store
+.git/
+
+# Media and Assets (AI doesn't need to index these for logic)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.mp4
+*.pdf
+*.zip
+*.tar.gz
+
+# Logs
+*.log
+logs/

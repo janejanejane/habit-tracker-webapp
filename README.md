@@ -1,6 +1,6 @@
 # Habit Tracker
 
-A modern web application to track daily habits, build streaks, and achieve your goals. Built with Next.js 16, React 19, Tailwind CSS, and TypeScript. All components and library files are fully documented with comprehensive JSDoc comments, and the project includes 53+ unit tests.
+A modern web application to track daily habits, build streaks, and achieve your goals. Built with Next.js 16, React 19, Tailwind CSS, and TypeScript. Features a robust storage layer with comprehensive CRUD operations, statistics calculations, and 53 passing unit tests. All components and library files are fully documented with comprehensive JSDoc comments.
 
 ## Features
 
@@ -10,11 +10,12 @@ A modern web application to track daily habits, build streaks, and achieve your 
 - ✅ Streak tracking (current & longest)
 - ✅ Completion rate visualization
 - ✅ Color-coded habits with icons
-- ✅ Local storage persistence
+- ✅ Local storage persistence with robust CRUD operations
 - ✅ Responsive design
-- ✅ Real-time statistics
+- ✅ Real-time statistics (streaks, completion rates, progress tracking)
+- ✅ **Robust storage layer with date serialization and ID generation**
 - ✅ **Comprehensive JSDoc documentation for all components and libraries**
-- ✅ 100% test coverage with Jest & React Testing Library
+- ✅ **53 passing unit tests with full storage coverage**
 - ✅ Type-safe with TypeScript strict mode
 
 ## Tech Stack
@@ -103,6 +104,9 @@ All React components and core library files are fully documented with JSDoc comm
 
 ````
 habit-tracker-webapp/
+├── lib/                       # Core business logic
+│   ├── types.ts               # TypeScript interfaces (User, Habit, HabitLog, UserStats)
+│   └── storage.ts             # Complete data persistence layer with CRUD operations
 ├── app/                       # Next.js App Router directory
 │   ├── page.tsx              # Home page (renders Dashboard)
 │   ├── layout.tsx            # Root layout
@@ -127,7 +131,7 @@ All models are defined in `lib/types.ts` with full JSDoc documentation.
 
 ```typescript
 interface Habit {
-  id: string;                                    // Auto-generated via Date.now()
+  id: string;                                    // Auto-generated: habit-${timestamp}-${randomString}
   userId: string;                                // Current user ID
   name: string;                                  // Habit name (required)
   description?: string;                          // Optional description
@@ -145,7 +149,7 @@ interface Habit {
 
 ```typescript
 interface HabitLog {
-  id: string; // Auto-generated
+  id: string; // Auto-generated: log-${timestamp}-${randomString}
   habitId: string; // Reference to Habit
   userId: string; // Current user ID
   date: Date; // Log date

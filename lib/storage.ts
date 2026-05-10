@@ -108,7 +108,14 @@ export const habitStorage = {
   getAllHabits: (): Habit[] => {
     if (typeof window === 'undefined') return [];
     const data = localStorage.getItem(HABITS_KEY);
-    return data ? JSON.parse(data) : [];
+    if (!data) return [];
+
+    const habits = JSON.parse(data);
+    return habits.map((habit: any) => ({
+      ...habit,
+      createdAt: new Date(habit.createdAt),
+      updatedAt: new Date(habit.updatedAt),
+    }));
   },
 
   /**
@@ -163,7 +170,7 @@ export const habitStorage = {
   createHabit: (habit: Omit<Habit, 'id' | 'createdAt' | 'updatedAt'>): Habit => {
     const newHabit: Habit = {
       ...habit,
-      id: `habit-${Date.now()}`,
+      id: `habit-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -252,7 +259,14 @@ export const habitStorage = {
   getAllLogs: (): HabitLog[] => {
     if (typeof window === 'undefined') return [];
     const data = localStorage.getItem(LOGS_KEY);
-    return data ? JSON.parse(data) : [];
+    if (!data) return [];
+    
+    const logs = JSON.parse(data);
+    return logs.map((log: any) => ({
+      ...log,
+      date: new Date(log.date),
+      createdAt: new Date(log.createdAt),
+    }));
   },
 
   /**
@@ -298,9 +312,15 @@ export const habitStorage = {
    * ```
    */
   getLogByDate: (habitId: string, date: Date): HabitLog | null => {
-    const dateStr = date.toISOString().split('T')[0];
+    const targetDate = new Date(date);
+    targetDate.setHours(0, 0, 0, 0);
+    
     const logs = habitStorage.getLogsByHabit(habitId);
-    return logs.find((log) => log.date.toString().split('T')[0] === dateStr) || null;
+    return logs.find(log => {
+      const logDate = new Date(log.date);
+      logDate.setHours(0, 0, 0, 0);
+      return logDate.getTime() === targetDate.getTime();
+    }) || null;
   },
 
   /**
@@ -341,7 +361,7 @@ export const habitStorage = {
     }
 
     const newLog: HabitLog = {
-      id: `log-${Date.now()}`,
+      id: `log-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       habitId,
       userId: CURRENT_USER_ID,
       date,
