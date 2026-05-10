@@ -110,12 +110,23 @@ export const habitStorage = {
     const data = localStorage.getItem(HABITS_KEY);
     if (!data) return [];
 
-    const habits = JSON.parse(data);
-    return habits.map((habit: any) => ({
-      ...habit,
-      createdAt: new Date(habit.createdAt),
-      updatedAt: new Date(habit.updatedAt),
-    }));
+    let habits;
+    try {
+        habits = JSON.parse(data);
+        if (!Array.isArray(habits)) {
+            console.log('Logs data is not an array');
+            return [];
+        }
+
+        return habits.map((habit: any) => ({
+        ...habit,
+        createdAt: new Date(habit.createdAt),
+        updatedAt: new Date(habit.updatedAt),
+        }));
+    } catch (error) {
+        console.log('Error parsing logs:', error);
+        return [];
+    }
   },
 
   /**
@@ -170,7 +181,7 @@ export const habitStorage = {
   createHabit: (habit: Omit<Habit, 'id' | 'createdAt' | 'updatedAt'>): Habit => {
     const newHabit: Habit = {
       ...habit,
-      id: `habit-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      id: `habit-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -261,12 +272,24 @@ export const habitStorage = {
     const data = localStorage.getItem(LOGS_KEY);
     if (!data) return [];
     
-    const logs = JSON.parse(data);
-    return logs.map((log: any) => ({
-      ...log,
-      date: new Date(log.date),
-      createdAt: new Date(log.createdAt),
-    }));
+    let logs;
+    try {
+        logs = JSON.parse(data);
+        if (!Array.isArray(logs)) {
+            console.log('Logs data is not an array');
+            return [];
+        }
+        
+        return logs.map((log: any) => ({
+        ...log,
+        date: new Date(log.date),
+        createdAt: new Date(log.createdAt),
+        }));
+    } catch (error) {
+        console.log('Error parsing logs:', error);
+        return [];
+    }
+
   },
 
   /**
