@@ -284,25 +284,29 @@ export default function DateSelector({
         )}
       </div>
 
-      <button
-        onClick={goToNextDay}
-        className="rounded-full p-1 text-habit-600 hover:bg-habit-100 hover:text-habit-900 transition-colors"
-        aria-label="Next day"
-      >
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
+      {!isTodayState ? (
+        <button
+          onClick={goToNextDay}
+          className="rounded-full p-1 text-habit-600 hover:bg-habit-100 hover:text-habit-900 transition-colors"
+          aria-label="Next day"
         >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </button>
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+      ) : (
+        <div className="w-7 h-7" />
+      )}
     </div>
   );
 }
